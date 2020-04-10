@@ -12,10 +12,11 @@ def ext_name():
         if filename.endswith("txt"):
             with open(filename, 'r', encoding='utf-8') as f:
                 code = f.readlines()
-                del code[len(code)-1]
+                #del code[len(code)-1]
                 code = list(map(lambda s: s.strip(), code))
                 jasan.append(code)
     jasan = sum(jasan,[])
+    print(jasan)
     return jasan
         
 
@@ -35,7 +36,6 @@ def crawing(code):
             object_list.append(tr_list[3])
         del object_list[0] #공백 제거
         total_list.append(object_list)
-
     return total_list
 
 def toCSV(_list):
