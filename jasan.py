@@ -1,3 +1,4 @@
+
 import os
 from urllib.request import urlopen
 from urllib.request import HTTPError
@@ -5,18 +6,24 @@ from bs4 import BeautifulSoup
 import csv
 import time
 
+count = 0
 
 def ext_name():
     jasan = []
+    global count
     for filename in os.listdir("."):
         if filename.endswith("txt"):
             with open(filename, 'r', encoding='utf-8') as f:
+                if(filename == 'README.txt'):
+                    continue
+                
                 code = f.readlines()
                 #del code[len(code)-1]
-                code = list(map(lambda s: s.strip(), code))
+                code = list(map(lambda s: s.strip(), code)) #개행 제거
                 jasan.append(code)
-    jasan = sum(jasan,[])
-    print(jasan)
+
+    jasan = sum(jasan,[]) #2차배열 -> 1차배열
+    count = len(jasan)
     return jasan
         
 
@@ -48,7 +55,7 @@ def toCSV(_list):
         csvfile.writerow(row)
 
     file.close
-    print('완료')
+    print(str(count) + '개 완료')
 
 
 if __name__ == "__main__":
